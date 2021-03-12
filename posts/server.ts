@@ -6,10 +6,10 @@ import { env } from "./util/envValidator";
 import * as controller from "./controllers/posts";
 
 const pool = new Pool({
-  user: "vpassanisi",
+  user: env.POSTGRES_USER,
   host: "postgres",
-  password: "tele.831",
-  database: "blogDB",
+  password: env.POSTGRES_PASSWORD,
+  database: env.POSTGRES_DB,
   port: 5432,
   ssl: false,
 });
@@ -25,6 +25,7 @@ app.use(async (ctx, next) => {
 app.use(bodyParser());
 
 router.post("/", controller.posts);
+router.post("/newPost", controller.newPost);
 
 app.use(router.routes());
 app.use(router.allowedMethods());

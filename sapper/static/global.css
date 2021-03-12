@@ -1,36 +1,105 @@
+html,
 body {
-	margin: 0;
-	font-family: Roboto, -apple-system, BlinkMacSystemFont, Segoe UI, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-	font-size: 14px;
-	line-height: 1.5;
-	color: #333;
+  position: relative;
+  width: 100%;
+  height: 100%;
 }
 
-h1, h2, h3, h4, h5, h6 {
-	margin: 0 0 0.5em 0;
-	font-weight: 400;
-	line-height: 1.2;
+body {
+  margin: 0;
+  font-family: Roboto, -apple-system, BlinkMacSystemFont, Segoe UI, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #333;
 }
 
-h1 {
-	font-size: 2em;
+*,
+::before,
+::after {
+  border-width: 0;
+  border-style: solid;
+  border-color: theme("borderColor.default", currentColor);
 }
 
 a {
-	color: inherit;
+  color: inherit;
 }
 
-code {
-	font-family: menlo, inconsolata, monospace;
-	font-size: calc(1em - 2px);
-	color: #555;
-	background-color: #f0f0f0;
-	padding: 0.2em 0.4em;
-	border-radius: 2px;
+button:focus {
+  outline: none;
 }
 
-@media (min-width: 400px) {
-	body {
-		font-size: 16px;
-	}
+blockquote,
+dl,
+dd,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+hr,
+figure,
+p,
+pre {
+  margin: 0;
+}
+
+:root {
+  --blue-50: #e3f2fd;
+  --blue-100: #bbdefb;
+  --blue-200: #90caf9;
+  --blue-300: #64b5f6;
+  --blue-400: #42a5f5;
+  --blue-500: #2196f3;
+  --blue-600: #1e88e5;
+  --blue-700: #1976d2;
+  --blue-800: #1565c0;
+  --blue-900: #0d47a1;
+
+  --gray-50: #fafafa;
+  --gray-100: #f5f5f5;
+  --gray-200: #eeeeee;
+  --gray-300: #e0e0e0;
+  --gray-400: #bdbdbd;
+  --gray-500: #9e9e9e;
+  --gray-600: #757575;
+  --gray-700: #616161;
+  --gray-800: #424242;
+  --gray-900: #212121;
+
+  --dark-gray-50: #f7f7f7;
+  --dark-gray-100: #eeeeee;
+  --dark-gray-200: #e2e2e2;
+  --dark-gray-300: #d0d0d0;
+  --dark-gray-400: #ababab;
+  --dark-gray-500: #8a8a8a;
+  --dark-gray-600: #636363;
+  --dark-gray-700: #505050;
+  --dark-gray-800: #323232;
+  --dark-gray-900: #121212;
+
+  --blue-gray-50: #eceff1;
+  --blue-gray-100: #cfd8dc;
+  --blue-gray-200: #b0bec5;
+  --blue-gray-300: #90a4ae;
+  --blue-gray-400: #78909c;
+  --blue-gray-500: #607d8b;
+  --blue-gray-600: #546e7a;
+  --blue-gray-700: #455a64;
+  --blue-gray-800: #37474f;
+  --blue-gray-900: #263238;
+
+  --black: #000000;
+  --white: #ffffff;
+  --transparent: #ff000000;
+
+  --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+.dark {
+  color: var(--white);
+  background-color: var(--dark-gray-900);
 }

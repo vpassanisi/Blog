@@ -1,5 +1,6 @@
 import fetch from "node-fetch";
 import {
+  GraphQLBoolean,
   GraphQLInt,
   GraphQLList,
   GraphQLNonNull,
@@ -22,10 +23,12 @@ const schema = new GraphQLSchema({
                 slug: { type: GraphQLString },
                 title: { type: GraphQLString },
                 banner: { type: GraphQLString },
+                tiny: { type: GraphQLString },
                 excerpt: { type: GraphQLString },
                 markdown: { type: GraphQLString },
                 created: { type: GraphQLInt },
                 updated: { type: GraphQLInt },
+                live: { type: GraphQLBoolean },
               },
             })
           )
@@ -56,11 +59,15 @@ const schema = new GraphQLSchema({
         type: new GraphQLObjectType({
           name: "newPostReturnType",
           fields: {
-            title: { type: GraphQLString },
+            slug: { type: GraphQLString },
           },
         }),
         args: {
           md: { type: GraphQLNonNull(GraphQLString) },
+          title: { type: GraphQLNonNull(GraphQLString) },
+          slug: { type: GraphQLNonNull(GraphQLString) },
+          banner: { type: GraphQLNonNull(GraphQLString) },
+          excerpt: { type: GraphQLNonNull(GraphQLString) },
         },
         async resolve(parent, args, ctx, info) {
           const { id } = ctx.headers;

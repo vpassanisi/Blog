@@ -16,7 +16,13 @@
 
 <style>
   nav {
-    position: relative;
+    position: fixed;
+    width: 100%;
+    height: 70px;
+    top: 0;
+    z-index: 100;
+    background-color: white;
+    border-bottom: 1px var(--gray-300) solid;
   }
 
   .nav__container {
@@ -24,14 +30,13 @@
     height: 100%;
     align-items: flex-end;
     display: flex;
-    flex: 1;
-    padding-top: 1rem;
-    padding-bottom: 1rem;
+    flex-direction: row;
     margin-left: auto;
     margin-right: auto;
     font-family: Rubik, sans-serif;
     font-weight: 700;
     justify-content: flex-end;
+    align-items: center;
     text-transform: uppercase;
   }
 
@@ -62,6 +67,6 @@
     transform: scaleX(1);
   }
   .selected::before {
-    background: #fd6378;
+    background: var(--upsdell-red-500);
   }
 </style>

@@ -1,62 +1,271 @@
-html,
-body {
-  position: relative;
-  width: 100%;
-  height: 100%;
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
 }
 
 body {
   margin: 0;
-  font-family: Roboto, -apple-system, BlinkMacSystemFont, Segoe UI, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-  font-size: 14px;
-  line-height: 1.5;
+  font-family: Merriweather, serif;
+  font-size: 1rem;
+  line-height: 1.6;
   color: #333;
 }
 
-*,
-::before,
-::after {
-  border-width: 0;
-  border-style: solid;
-  border-color: theme("borderColor.default", currentColor);
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: Rubik, sans-serif;
+  font-weight: 700;
+  line-height: 1.2;
+  margin: 0 0 0.5rem 0;
+}
+
+h1 {
+  font-family: Merriweather, serif;
+  font-size: 4em;
+  margin: 0 0 1rem 0;
+}
+
+h2 {
+  margin: 1.6rem 0 0 0;
+  font-size: 1.8rem;
+}
+
+h3 {
+  font-size: 1.5rem;
+}
+
+h4 {
+  font-size: 1.4rem;
+}
+
+h5 {
+  font-size: 1.3rem;
+}
+
+h6 {
+  font-size: 1.2rem;
+}
+
+p,
+ul,
+ol {
+  font-size: 1.3rem;
+  line-height: 1.75em;
+  margin: 1.2rem 0;
+}
+
+ol,
+ul {
+  padding-left: 2rem;
+  -webkit-padding-start: 5%;
+  -webkit-padding-end: 5%;
+}
+
+li {
+  margin: 1rem 0;
+}
+
+li p {
+  margin-bottom: 0.5rem;
+  margin-top: 0.5rem;
 }
 
 a {
   color: inherit;
+  transition: color linear 0.15s;
+}
+
+a:hover {
+  color: var(--upsdell-red-500);
+}
+
+p a {
+  text-decoration: none;
+  box-shadow: inset 0 -0.12em 0 var(--upsdell-red-500);
+  -webkit-transition: box-shadow 0.2s ease-in-out, color 0.2s ease-in-out;
+  transition: box-shadow 0.2s ease-in-out, color 0.2s ease-in-out;
+}
+
+p a:hover {
+  box-shadow: inset 0 -1.5em 0 var(--upsdell-red-500);
+  color: #fff;
 }
 
 button:focus {
   outline: none;
 }
 
-blockquote,
-dl,
-dd,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-hr,
-figure,
-p,
+img {
+  width: 100%;
+  height: auto;
+}
+
+hr {
+  background-image: linear-gradient(
+    to right,
+    rgba(0, 0, 0, 0),
+    rgba(253, 99, 120, 0.8),
+    rgba(0, 0, 0, 0)
+  );
+  border: 0;
+  height: 2px;
+  margin: 40px auto;
+}
+
+code {
+  font-family: "SF Mono", menlo, inconsolata, monospace;
+  font-size: calc(1rem - 2px);
+  color: #555;
+  background-color: #f0f0f0;
+  padding: 0.2rem 0.4rem;
+  border-radius: 2px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
 pre {
-  margin: 0;
+  border-radius: 8px !important;
+  margin: 1.2rem 0 !important;
+}
+
+pre code {
+  padding: 0;
+}
+
+blockquote {
+  border-left: 4px solid #cccccc;
+  font-size: 1.4rem;
+  font-style: italic;
+  margin: 2rem 0;
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
+blockquote p {
+  padding-bottom: 6px;
+}
+
+blockquote footer {
+  font-size: 1.1rem;
+  text-align: right;
+}
+
+figure {
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+  -webkit-margin-start: 0;
+  -webkit-margin-end: 0;
+  margin: 0 0 3rem 0;
+}
+
+table {
+  border-collapse: collapse;
+  font-family: Rubik, sans-serif;
+  font-size: 1.125rem;
+  margin: 2rem 0;
+}
+
+th {
+  border-bottom: 2px solid #cccccc;
+  padding: 0.4rem 0.8rem;
+}
+
+td {
+  padding: 0.4rem 0.8rem;
+}
+
+.content__article h1 {
+  font-size: 3em;
+  margin: 1em 0;
+}
+
+@media (max-width: 1020px) {
+  h1 {
+    font-size: 3rem;
+  }
+
+  .content__article h1 {
+    font-size: 2.4rem;
+  }
+}
+
+@media (max-width: 480px) {
+  body {
+    font-size: 14px;
+  }
+
+  p,
+  ul,
+  ol {
+    font-size: 1.2rem;
+    margin: 1rem 0;
+  }
 }
 
 :root {
-  --blue-50: #e3f2fd;
-  --blue-100: #bbdefb;
-  --blue-200: #90caf9;
-  --blue-300: #64b5f6;
-  --blue-400: #42a5f5;
-  --blue-500: #2196f3;
-  --blue-600: #1e88e5;
-  --blue-700: #1976d2;
-  --blue-800: #1565c0;
-  --blue-900: #0d47a1;
+  /* https://coolors.co/d88c9a-f2d0a9-76949f-0f3957-b10f2e */
+  --shimmering-blush-50: #faf1f3;
+  --shimmering-blush-100: #f3dde1;
+  --shimmering-blush-200: #ecc6cd;
+  --shimmering-blush-300: #e4afb8;
+  --shimmering-blush-400: #de9da9;
+  --shimmering-blush-500: #d88c9a;
+  --shimmering-blush-600: #d48492;
+  --shimmering-blush-700: #ce7988;
+  --shimmering-blush-800: #c86f7e;
+  --shimmering-blush-900: #bf5c6c;
+
+  --deep-champagne-50: #fdf9f5;
+  --deep-champagne-100: #fbf1e5;
+  --deep-champagne-200: #f9e8d4;
+  --deep-champagne-300: #f6dec3;
+  --deep-champagne-400: #f4d7b6;
+  --deep-champagne-500: #f2d0a9;
+  --deep-champagne-600: #f0cba2;
+  --deep-champagne-700: #eec498;
+  --deep-champagne-800: #ecbe8f;
+  --deep-champagne-900: #e8b37e;
+
+  --pewter-blue-50: #eff2f3;
+  --pewter-blue-100: #d6dfe2;
+  --pewter-blue-200: #bbcacf;
+  --pewter-blue-300: #9fb4bc;
+  --pewter-blue-400: #8ba4ad;
+  --pewter-blue-500: #76949f;
+  --pewter-blue-600: #6e8c97;
+  --pewter-blue-700: #63818d;
+  --pewter-blue-800: #597783;
+  --pewter-blue-900: #466572;
+
+  --upsdell-red-50: #f6e2e6;
+  --upsdell-red-100: #e8b7c0;
+  --upsdell-red-200: #d88797;
+  --upsdell-red-300: #c8576d;
+  --upsdell-red-400: #bd334d;
+  --upsdell-red-500: #b10f2e;
+  --upsdell-red-600: #aa0d29;
+  --upsdell-red-700: #a10b23;
+  --upsdell-red-800: #98081d;
+  --upsdell-red-900: #880412;
+
+  --prussian-blue-50: #e2e7eb;
+  --prussian-blue-100: #b7c4cd;
+  --prussian-blue-200: #879cab;
+  --prussian-blue-300: #577489;
+  --prussian-blue-400: #335770;
+  --prussian-blue-500: #0f3957;
+  --prussian-blue-600: #0d334f;
+  --prussian-blue-700: #0b2c46;
+  --prussian-blue-800: #08243c;
+  --prussian-blue-900: #04172c;
 
   --gray-50: #fafafa;
   --gray-100: #f5f5f5;

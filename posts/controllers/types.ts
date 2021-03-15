@@ -1,29 +1,20 @@
 export interface Post {
   id: string;
   slug: string;
+  title: string;
+  banner: string;
+  tiny: string;
+  excerpt: string;
   markdown: string;
   created: number;
   updated?: number;
-}
-
-export interface Article {
-  id: string;
-  slug: string;
-  title: string;
-  excerpt: string;
-  markdown: string;
-  banner: string;
-  created: number;
-  update?: number;
+  live: boolean;
 }
 
 export interface Request {
   slug?: string;
   md?: string;
-}
-
-export interface Data {
-  title: string;
-  slug: string;
-  banner: string;
+  title?: string;
+  banner?: string;
+  excerpt?: string;
 }

@@ -12,10 +12,12 @@
               slug
               title
               banner
+              tiny
               excerpt
               markdown
               created
               updated
+              live
             }
           }
           `,
@@ -26,9 +28,9 @@
 
       if (errors) throw Error(errors[0].message);
 
-      const posts = data.posts;
+      const articles = data.posts;
 
-      return { posts };
+      return { articles };
     } catch (error) {
       console.log(error);
       this.error(res.status, error);
@@ -37,8 +39,9 @@
 </script>
 
 <script lang="ts">
-  import type { Article } from "../../../../posts/controllers/types";
-  export let posts: Article[];
+  import type { Post } from "../../../../posts/controllers/types";
+  import ArticleCard from "../../components/ArticleCard.svelte";
+  export let articles: Post[];
 </script>
 
 <svelte:head>
@@ -46,49 +49,25 @@
 </svelte:head>
 
 <div class="container">
-  <h1 class="container__title">Articles</h1>
-
-  <ul class="container__list">
-    {#each posts as post}
-      <li class="container__item">
-        <a class="container__link" rel="prefetch" href="articles/{post.slug}"
-          >{post.title}</a
-        >
-        <span class="container__excerpt">{post.excerpt}</span>
-      </li>
+  <div class="container__list">
+    {#each articles as article}
+      <ArticleCard {article} />
     {/each}
-  </ul>
+  </div>
 </div>
 
 <style>
   .container {
     width: 90%;
     max-width: 768px;
-    margin: 0 auto;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 4rem;
   }
 
-  .container__title {
-    display: block;
-    font-family: Merriweather, serif;
-    margin: 2rem 0;
-    font-size: 4rem;
-  }
-
-  .container__link {
-    font-size: 1.75rem;
-    font-weight: 700;
-  }
-
-  .container__excerpt {
-    display: block;
-  }
-
-  ul {
-    margin: 0 0 1em 0;
-    line-height: 1.5;
-  }
-
-  li {
-    list-style: none;
+  .container__list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
   }
 </style>

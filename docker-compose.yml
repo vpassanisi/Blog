@@ -26,6 +26,7 @@ services:
     command: npm run dev
     volumes:
       - ./posts:/usr/src/app
+      - /usr/src/app/node_modules/
 
   postgres:
     expose: ["5432"]

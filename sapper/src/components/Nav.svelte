@@ -1,4 +1,6 @@
 <script lang="ts">
+  import DarkModeToggle from "./DarkModeToggle.svelte";
+
   export let segment: string;
 </script>
 
@@ -11,6 +13,7 @@
       class={segment === "articles" ? "selected" : ""}
       href="articles">articles</a
     >
+    <DarkModeToggle />
   </div>
 </nav>
 
@@ -23,6 +26,10 @@
     z-index: 100;
     background-color: white;
     border-bottom: 1px var(--gray-300) solid;
+  }
+
+  :global(.dark nav) {
+    background-color: var(--dark-gray-800);
   }
 
   .nav__container {

@@ -39,9 +39,22 @@
 </script>
 
 <script lang="ts">
-  import type { Post } from "../../../../posts/controllers/types";
   import ArticleCard from "../../components/ArticleCard.svelte";
+  import type { Post } from "../../../../posts/controllers/types";
+  import { onMount } from "svelte";
+
   export let articles: Post[];
+
+  onMount(() => {
+    const listEl = document.getElementById("list");
+    const root = document.documentElement;
+
+    root.style.setProperty("--listWidth", listEl.offsetWidth + "px");
+
+    window.addEventListener("resize", () => {
+      root.style.setProperty("--listWidth", listEl.offsetWidth + "px");
+    });
+  });
 </script>
 
 <svelte:head>
@@ -49,7 +62,7 @@
 </svelte:head>
 
 <div class="container">
-  <div class="container__list">
+  <div id="list" class="container__list">
     {#each articles as article}
       <ArticleCard {article} />
     {/each}
@@ -58,16 +71,14 @@
 
 <style>
   .container {
-    width: 90%;
-    max-width: 768px;
-    margin-left: auto;
-    margin-right: auto;
     padding-top: 4rem;
   }
 
   .container__list {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 2rem;
+    width: 90%;
+    max-width: 1024px;
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 auto;
   }
 </style>

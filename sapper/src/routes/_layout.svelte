@@ -14,7 +14,7 @@
   main {
     position: relative;
     padding: 0;
-    margin: 70px auto;
+    margin: 60px auto;
     box-sizing: border-box;
   }
 </style>

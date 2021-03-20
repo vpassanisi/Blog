@@ -68,6 +68,7 @@ const schema = new GraphQLSchema({
           slug: { type: GraphQLNonNull(GraphQLString) },
           banner: { type: GraphQLNonNull(GraphQLString) },
           excerpt: { type: GraphQLNonNull(GraphQLString) },
+          live: { type: GraphQLNonNull(GraphQLBoolean) },
         },
         async resolve(parent, args, ctx, info) {
           const { id } = ctx.headers;

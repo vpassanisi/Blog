@@ -1,26 +1,17 @@
 <script lang="ts">
-  import { onMount } from "svelte";
-
-  let isDarkMode: boolean;
-
-  function toggle(): void {
-    isDarkMode = !isDarkMode;
-    window.document.body.classList.toggle("dark");
-  }
-
-  onMount(() => {
-    isDarkMode = window.matchMedia("(prefers-color-scheme: dark)").matches;
-
-    if (isDarkMode) window.document.body.classList.toggle("dark");
-  });
+  import { darkMode } from "../store/darkMode";
 </script>
 
-<div id="toggle" class="container" on:click={toggle}>
+<div
+  id="toggle"
+  class="container"
+  on:click={() => ($darkMode ? darkMode.turnOff() : darkMode.turnOn())}
+>
   <input
     class="container__checkbox"
     id="toggle__input"
     type="checkbox"
-    bind:checked={isDarkMode}
+    bind:checked={$darkMode}
   />
   <div for="toggle__input" class="container__toggle">
     <div class="toggle__bg">
@@ -65,7 +56,8 @@
     height: 22px;
     padding: 0;
     border-radius: 30px;
-    background-color: #0f1114;
+    border: 1px var(--gray-500) solid;
+    background-color: var(--black);
     transition: all 0.2s ease;
   }
 

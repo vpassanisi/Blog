@@ -12,6 +12,7 @@ export async function posts(ctx: Koa.Context) {
   let res;
 
   if (!slug) {
+    text += " WHERE live = true ORDER BY created";
     res = await ctx.pool.query<Post>(text);
   } else {
     text = text + " WHERE slug = $1";
@@ -22,12 +23,12 @@ export async function posts(ctx: Koa.Context) {
 }
 
 export async function newPost(ctx: Koa.Context) {
-  const { md, slug, title, banner, excerpt } = <Request>ctx.request.body;
+  const { md, slug, title, banner, excerpt, live } = <Request>ctx.request.body;
   if (!md) ctx.throw("no markdown");
   if (!slug) ctx.throw("no slug");
   if (!title) ctx.throw("no title");
   if (!banner) ctx.throw("no banner");
-  if (!excerpt) ctx.throw("no excerpt");
+  if (typeof live !== "boolean") ctx.throw("no live");
 
   const res = await fetch(banner);
   const buffer = await res.buffer();
@@ -48,7 +49,7 @@ export async function newPost(ctx: Koa.Context) {
     md,
     Math.floor(Date.now() / 1000),
     null,
-    true,
+    live,
   ];
 
   const result = await ctx.pool.query<Post>(text, values);

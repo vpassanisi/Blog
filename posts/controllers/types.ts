@@ -17,4 +17,5 @@ export interface Request {
   title?: string;
   banner?: string;
   excerpt?: string;
+  live?: boolean;
 }

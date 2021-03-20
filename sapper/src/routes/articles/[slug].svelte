@@ -46,6 +46,7 @@
   import prism from "prismjs";
   import readingTime from "reading-time";
   import { onDestroy, onMount } from "svelte";
+  import { fade } from "svelte/transition";
   import type { Post } from "../../../../posts/controllers/types";
 
   export let article: Post;
@@ -91,6 +92,8 @@
   marked.setOptions({ renderer });
   const md = marked.default(article.markdown);
 
+  let loaded = false;
+
   onMount(() => {
     bannerEl = document.getElementById("banner");
     document.addEventListener("scroll", () => {
@@ -110,7 +113,7 @@
 
     const img = new Image();
     img.onload = () => {
-      bannerEl.style.backgroundImage = `url(${article.banner}`;
+      loaded = true;
     };
     img.src = article.banner;
   });
@@ -120,13 +123,61 @@
 
 <svelte:head>
   <title>{article.title}</title>
+  <!--  Include canonical links to your blog -->
+  <!--   <link rel="canonical" href="" /> -->
+
+  <!-- Validate your twitter card with https://cards-dev.twitter.com/validator  -->
+  <!-- Update content properties with your URL   -->
+  <!-- 	<meta property="og:url" content=""} /> -->
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content={article.title} />
+  <meta name="Description" content={article.excerpt} />
+  <meta property="og:description" content={article.excerpt} />
+
+  <!--  Link to your preferred image  -->
+  <meta property="og:image" content={article.banner} />
+
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <!--  Link to your Domain  -->
+  <!-- 	<meta name="twitter:domain" value="" /> -->
+
+  <!--  Link to your Twitter Account  -->
+  <meta name="twitter:creator" value="https://twitter.com/VinnyPassanisi" />
+
+  <meta name="twitter:title" value={article.title} />
+  <meta name="twitter:description" content={article.excerpt} />
+
+  <!--  Link to your preferred image to be displayed on Twitter (832x520px) -->
+  <!-- 	<meta name="twitter:image" content="" /> -->
+
+  <meta name="twitter:label1" value="Published on" />
+  <meta
+    name="twitter:data1"
+    value={new Date(article.created).toLocaleDateString(undefined, {
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+    })}
+  />
+  <meta name="twitter:label2" value="Reading Time" />
+  <meta name="twitter:data2" value={readTime.text} />
 </svelte:head>
 
-<div
-  id="banner"
-  class="banner"
-  style={`background-image: url("${article.tiny}");`}
-/>
+<div id="banner" class="banner">
+  {#if loaded}
+    <div
+      class="banner__large"
+      style={`background-image: url("${article.banner}");`}
+    />
+  {:else}
+    <div
+      transition:fade
+      class="banner__tiny"
+      style={`background-image: url("${article.tiny}");`}
+    />
+  {/if}
+</div>
 
 <section class="content">
   <article class="content__container">
@@ -141,13 +192,29 @@
 
 <style>
   .banner {
+    position: relative;
     width: 100%;
     height: 35vw;
+  }
+
+  .banner__large {
+    position: absolute;
+    height: 100%;
+    width: 100%;
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
-    margin-top: 70px;
-    transition: background-image 0.2s ease-in-out;
+    z-index: 0;
+  }
+
+  .banner__tiny {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    z-index: 1;
   }
 
   .content {
@@ -157,6 +224,10 @@
     display: flex;
     align-items: center;
     justify-content: center;
+  }
+
+  :global(.dark .content) {
+    background-color: var(--dark-gray-900);
   }
 
   .content__container {
@@ -174,8 +245,16 @@
     color: var(--gray-600);
   }
 
+  :global(.dark .content__excerpt) {
+    color: var(--gray-400);
+  }
+
   .content__date {
     font-size: 1rem;
     color: var(--gray-700);
+  }
+
+  :global(.dark .content__date) {
+    color: var(--gray-500);
   }
 </style>

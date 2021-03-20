@@ -5,9 +5,11 @@
   let slug: string = "";
   let banner: string;
   let excerpt: string;
+  let live: boolean = false;
 
   function updateSlug(): void {
     slug = this.value.split(" ").join("-");
+    slug = slug.toLowerCase();
   }
 
   async function addPost() {
@@ -20,8 +22,8 @@
       },
       body: JSON.stringify({
         query: `
-        mutation Input(\$slug: String!, \$title: String!, \$banner: String!, \$excerpt: String! \$md: String!) {
-          newPost(slug: \$slug, title: \$title, banner: \$banner, excerpt: \$excerpt, md: \$md) {
+        mutation Input(\$slug: String!, \$title: String!, \$banner: String!, \$excerpt: String! \$md: String!, \$live: Boolean!) {
+          newPost(slug: \$slug, title: \$title, banner: \$banner, excerpt: \$excerpt, md: \$md, live: \$live) {
             slug
           }
         }
@@ -32,6 +34,7 @@
           banner,
           excerpt,
           md,
+          live,
         },
       }),
     });
@@ -42,6 +45,7 @@
 
 <svelte:head>
   <title>Admin</title>
+  <meta name="robots" content="noindex, nofollow" />
 </svelte:head>
 
 <section class="admin">
@@ -77,6 +81,9 @@
       type="text"
       placeholder="auth . . ."
     />
+    <div class="container__live">
+      Live: <input type="checkbox" bind:checked={live} />
+    </div>
     <button on:click={addPost} class="container__add">Add</button>
   </div>
 </section>
@@ -88,6 +95,10 @@
 
   .admin {
     margin-top: 70px;
+  }
+
+  :global(.dark .admin) {
+    background-color: var(--dark-gray-900);
   }
 
   .admin__container {
@@ -110,6 +121,10 @@
     font-size: 1rem;
   }
 
+  :global(.dark .container__banner) {
+    background-color: var(--dark-gray-800);
+  }
+
   .container__banner:focus {
     outline: none;
   }
@@ -130,6 +145,10 @@
     border-radius: 0.5rem;
   }
 
+  :global(.dark .container__slug) {
+    background-color: var(--dark-gray-800);
+  }
+
   .container__title {
     width: 100%;
     border: none;
@@ -141,6 +160,10 @@
 
   .container__title:focus {
     outline: none;
+  }
+
+  :global(.dark .container__title) {
+    background-color: var(--dark-gray-800);
   }
 
   .container__excerpt {
@@ -159,6 +182,10 @@
     outline: none;
   }
 
+  :global(.dark .container__excerpt) {
+    background-color: var(--dark-gray-800);
+  }
+
   .container__md {
     width: 100%;
     max-width: 100%;
@@ -175,6 +202,10 @@
     outline: none;
   }
 
+  :global(.dark .container__md) {
+    background-color: var(--dark-gray-800);
+  }
+
   .container__auth {
     width: 100%;
     padding: 0.5rem;
@@ -188,12 +219,18 @@
     outline: none;
   }
 
+  :global(.dark .container__auth) {
+    background-color: var(--dark-gray-800);
+  }
+
   .container__add {
     margin-top: 1rem;
-    padding-left: 1rem;
-    padding-right: 1rem;
+    padding-left: 3rem;
+    padding-right: 3rem;
     padding-top: 0.25rem;
     padding-bottom: 0.25rem;
-    background-color: var(--blue-200);
+    font-size: 1.5rem;
+    color: var(--white);
+    background-color: var(--upsdell-red-500);
   }
 </style>

@@ -1,35 +1,49 @@
 <script lang="ts">
   import readingTime from "reading-time";
   import { onMount } from "svelte";
+  import { fade } from "svelte/transition";
   import type { Post } from "../../../posts/controllers/types";
 
   export let article: Post;
-  const id = Math.random();
+  let loaded = false;
 
   const readTime = readingTime(article.markdown);
 
-  onMount(() => {
-    const imgEl = document.getElementById(`${id}`);
+  const date = new Date(article.created * 1000).toLocaleString("en-US", {
+    day: "numeric",
+    month: "short",
+    year: "numeric",
+  });
 
+  onMount(() => {
     const img = new Image();
     img.onload = () => {
-      imgEl.style.backgroundImage = `url(${article.banner})`;
+      loaded = true;
     };
     img.src = article.banner;
   });
 </script>
 
 <a rel="prefetch" href="articles/{article.slug}" class="article">
-  <div
-    id={`${id}`}
-    class="article__img"
-    style={`background-image: url(${article.tiny})`}
-  />
+  <div class="article__img">
+    {#if loaded}
+      <div
+        class="article__large"
+        style={`background-image: url(${article.banner})`}
+      />
+    {:else}
+      <div
+        transition:fade
+        class="article__tiny"
+        style={`background-image: url(${article.tiny})`}
+      />
+    {/if}
+  </div>
 
   <a class="article__link" href="articles/{article.slug}" title={article.title}
     >{article.title}</a
   >
-  <small class="article__readtime">{readTime.text}</small>
+  <small class="article__readtime">{date} - {readTime.text}</small>
 </a>
 
 <style>
@@ -43,12 +57,29 @@
   }
 
   .article__img {
+    position: relative;
     width: 100%;
     height: calc(var(--listWidth) / 2);
-    transition: background-image ease-in-out 0.3s;
+  }
+
+  .article__large {
+    position: absolute;
+    width: 100%;
+    height: 100%;
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
+    z-index: 0;
+  }
+
+  .article__tiny {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    z-index: 1;
   }
 
   @media only screen and (min-width: 640px) {
@@ -91,6 +122,8 @@
     max-height: 4rem;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
   }
 
   .article__readtime {

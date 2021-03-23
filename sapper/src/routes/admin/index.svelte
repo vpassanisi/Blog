@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { onMount } from "svelte";
+
   let md: string;
   let auth: string;
   let title: string;
@@ -41,6 +43,10 @@
 
     console.log(await res.json());
   }
+
+  onMount(() => {
+    document.documentElement.style.setProperty("--bg-opacity", "1");
+  });
 </script>
 
 <svelte:head>

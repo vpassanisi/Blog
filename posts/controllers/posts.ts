@@ -56,3 +56,18 @@ export async function newPost(ctx: Koa.Context) {
 
   ctx.body = { slug: result.rows[0].slug };
 }
+
+export async function updatePost(ctx: Koa.Context) {
+  const { id, live } = ctx.request.body;
+
+  if (!id) ctx.throw("no id");
+  if (typeof live !== "boolean") ctx.throw("no live");
+
+  const values = [live, id];
+  const text: string = "UPDATE posts SET live = $1 WHERE id = $2 RETURNING *";
+
+  const result = await ctx.pool.query<Post>(text, values);
+
+  console.log(result.rows);
+  ctx.body = { slug: result.rows[0].slug };
+}

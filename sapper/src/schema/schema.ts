@@ -8,6 +8,7 @@ import {
   GraphQLSchema,
   GraphQLString,
 } from "graphql";
+import type { resolve } from "path";
 
 const schema = new GraphQLSchema({
   query: new GraphQLObjectType({
@@ -78,6 +79,35 @@ const schema = new GraphQLSchema({
           }
 
           const res = await fetch("http://posts:5000/newPost", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(args),
+          });
+
+          if (!res.ok) throw Error(await res.text());
+
+          return await res.json();
+        },
+      },
+      updatePost: {
+        type: new GraphQLObjectType({
+          name: "updatePostReturnType",
+          fields: {
+            slug: { type: GraphQLString },
+          },
+        }),
+        args: {
+          id: { type: GraphQLNonNull(GraphQLString) },
+          live: { type: GraphQLNonNull(GraphQLBoolean) },
+        },
+        async resolve(parent, args, ctx, info) {
+          const { id } = ctx.headers;
+          const { AUTH_UUID } = process.env;
+          if (!AUTH_UUID && !id && id !== AUTH_UUID) {
+            throw Error("Unauthorized");
+          }
+
+          const res = await fetch("http://posts:5000/updatePost", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(args),

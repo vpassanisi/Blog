@@ -14,7 +14,6 @@
   main {
     position: relative;
     padding: 0;
-    margin: 60px auto;
     box-sizing: border-box;
   }
 </style>

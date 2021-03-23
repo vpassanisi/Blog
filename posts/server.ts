@@ -18,6 +18,16 @@ const app = new Koa();
 const router = new KoaRouter();
 
 app.use(async (ctx, next) => {
+  try {
+    await next();
+  } catch (err) {
+    ctx.status = err.status || 500;
+    ctx.body = err.message;
+    // ctx.app.emit('error', err, ctx);
+  }
+});
+
+app.use(async (ctx, next) => {
   ctx.pool = pool;
   await next();
 });
@@ -26,6 +36,7 @@ app.use(bodyParser());
 
 router.post("/", controller.posts);
 router.post("/newPost", controller.newPost);
+router.post("/updatePost", controller.updatePost);
 
 app.use(router.routes());
 app.use(router.allowedMethods());

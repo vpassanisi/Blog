@@ -46,6 +46,42 @@
       console.log(error);
     }
   }
+
+  async function update() {
+    if (!auth) return;
+    try {
+      const res = await fetch("/gql", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: auth,
+        },
+        body: JSON.stringify({
+          query: `
+        mutation Input(\$id: String!, \$live: Boolean!) {
+            updatePost(id: \$id, live: \$live) {
+              slug
+            }
+          }
+        `,
+          variables: {
+            id: article.id,
+            live: article.live,
+          },
+        }),
+      });
+
+      const { data, errors } = await res.json();
+
+      if (errors) throw Error(errors);
+
+      slug = data.updatePost.slug;
+
+      console.log(slug);
+    } catch (error) {
+      console.log(error);
+    }
+  }
 </script>
 
 <svelte:head>
@@ -70,7 +106,7 @@
       name="slug"
     />
 
-    <button class="container__boom" on:click={boom}>Boom</button>
+    <button class="container__boom" on:click={boom}>Get</button>
 
     {#if article}
       <div class="container__article">
@@ -84,7 +120,7 @@
           />
         </div>
       </div>
-      <button class="container__boom">Update</button>
+      <button class="container__boom" on:click={update}>Update</button>
     {/if}
   </div>
 </section>

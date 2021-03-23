@@ -49,6 +49,8 @@
     const listEl = document.getElementById("list");
     const root = document.documentElement;
 
+    root.style.setProperty("--bg-opacity", "1");
+
     root.style.setProperty("--listWidth", listEl.offsetWidth + "px");
 
     window.addEventListener("resize", () => {
@@ -71,7 +73,8 @@
 
 <style>
   .container {
-    padding-top: 4rem;
+    margin-top: 6rem;
+    padding-top: 2rem;
   }
 
   .container__list {

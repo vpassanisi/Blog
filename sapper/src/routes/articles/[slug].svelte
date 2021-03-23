@@ -95,6 +95,7 @@
   let loaded = false;
 
   onMount(() => {
+    document.documentElement.style.setProperty("--bg-opacity", "1");
     bannerEl = document.getElementById("banner");
     document.addEventListener("scroll", () => {
       scroll = document.documentElement.scrollTop;
@@ -118,7 +119,9 @@
     img.src = article.banner;
   });
 
-  onDestroy(() => clearInterval(scrollIntervalID));
+  onDestroy(() => {
+    clearInterval(scrollIntervalID);
+  });
 </script>
 
 <svelte:head>
@@ -195,6 +198,7 @@
     position: relative;
     width: 100%;
     height: 35vw;
+    margin-top: 6rem;
   }
 
   .banner__large {

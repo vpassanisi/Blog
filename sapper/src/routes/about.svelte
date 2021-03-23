@@ -22,14 +22,13 @@
     <div>
       <h1>About Me</h1>
       <div>
-        Hi, I'm Vincent Passanisi and I am a full-stack developer currently
-        living in Santa Cruz, California. I recieved my bachelor's in Audio
-        Engineering and Technology in 2015 and began working with sound and
-        making music. I started to develop an interest in writing code, so I
-        learned HTML/CSS and JavaScript, and found myself creating web apps and
-        eventually transitioning from audio engineering to full time web
-        development. Since then, I have expanded my skills to include Go,
-        Python, Vue, React and much more!
+        Hi, I'm Vincent Passanisi and I am a Software Engineer currently living
+        in Santa Cruz, California. I started programming and writing code in
+        2010, and I recieved my bachelor's in Audio Engineering and Technology
+        in 2015. I learned HTML/CSS and JavaScript, and found myself creating
+        web apps and eventually transitioning from audio engineering to full
+        time web development. Since then, I have expanded my skills to include
+        Go, Python, Vue, React and much more!
       </div>
     </div>
   </div>

@@ -4,6 +4,7 @@ import bodyParser from "koa-bodyparser";
 import { Pool } from "pg";
 import { env } from "./util/envValidator";
 import * as controller from "./controllers/posts";
+import { handleErrors } from "./util/ErrorHandler";
 
 const pool = new Pool({
   user: env.POSTGRES_USER,
@@ -17,15 +18,7 @@ const pool = new Pool({
 const app = new Koa();
 const router = new KoaRouter();
 
-app.use(async (ctx, next) => {
-  try {
-    await next();
-  } catch (err) {
-    ctx.status = err.status || 500;
-    ctx.body = err.message;
-    // ctx.app.emit('error', err, ctx);
-  }
-});
+app.use(handleErrors);
 
 app.use(async (ctx, next) => {
   ctx.pool = pool;

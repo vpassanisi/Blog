@@ -1,0 +1,28 @@
+slug: peak-and-rms-metering
+
+title: Peak and RMS metering
+
+banner: https://source.unsplash.com/eXVd7gDPO9A
+
+tiny: data:image/jpeg;base64,/9j/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAUABsDASIAAhEBAxEB/8QAGAABAQEBAQAAAAAAAAAAAAAABwACCAH/xAAiEAABAwQBBQEAAAAAAAAAAAABAAIDBAUGERIHEyExUUH/xAAXAQEBAQEAAAAAAAAAAAAAAAAEAAMF/8QAGREAAwEBAQAAAAAAAAAAAAAAAAECAxES/9oADAMBAAIRAxEAPwAlxJojnY5w2nDFaSGtDSYvz4ucrVkLKTRI9JIxPqvDbuLXsBATdN0p5ImbUi1kuL25trmkkjHcLTrwub7naA24ThjTxDjrwlm89Y6GtgLHMGiNI7qswt8lRI8MGidrkaVo66bes7QTklaa9w9FSkoAeukcR7WOR+qUoj//2Q==
+
+excerpt: You always need the right tools for the job, and when it comes to music creation your most important tools are your meters.
+
+markdown:
+A tool can take many forms, like a hammer, a drill, a level, but when it comes to making better sounding music the most important tool is an RMS meter.  As with any tool, it is important to know exactly what is should be used for and how to use it.  So let's take a dive into metering audio and how to use these tools to make better sounding recordings.
+
+### Peak vs. RMS
+In order to understand metering in general, the key concept is that the Peak level of any section of audio has very little to do with how loud that audio sounds. For example, a piece of audio containing recorded and unprocessed drums may have a very high Peak level and a relatively low volume. Conversely, a vocal recording could have the same Peak level as the drums, but will often sound much louder. This is because the Peak level of the drums will rise and fall very quickly, while a vocal usually consists of sustained notes. Your ears perceive volume as an average of the sound pressure over time, so signals that stay at a given level for longer will sound louder.
+
+So a Peak meter tells us the highest point of an audio signal at any given time.  That's great, but what if I want to measure how LOUD the audio is.  Well, that is where RMS meters come in.  RMS stands for Root Mean Square and it gets very technical very quick, but basically it is an average over time for a complex wave.  For our purposes, an RMS meter measure how loud the audio is.  A related, but slightly different, way to measure loudness is a VU meter.  VU is similar to RMS in that it averages the sound over time, but it achieves this electrically and the of the needle can vary.
+![A VU meter](https://upload.wikimedia.org/wikipedia/commons/f/f2/VU_Meter.jpg)
+
+The meters like the ones that you find on every channel of most modern DAWs (Logic, Pro Tools, Ableton) are all Peak meters, and this is for a very important reason.  When you are recording audio, the first thing that you should be concerned with is whether the audio will clip.  What does clipping mean? I am glad you asked! 
+
+### Clipping
+All digital audio has a maximum volume, where the binary of more than one sample is all 1s, and at that point the audio will be clipped and you will hear distortion. So a Peak meter is very useful for seeing if you have reached that point, since Peak is the loudest point in the audio.  That is why DAWs have Peak meters, because when you press record you usually want to see if the audio is clipping.  However, when you are making music you constantly are wanting to know how loud an instrument, bus, or mix is and that is what RMS or VU is used for.  Some DAWs will let you switch the meters on each channel from Peak to RMS or VU, but usually you will have to find a plugin.  I like the [PSP TripleMeter](https://www.bhphotovideo.com/c/product/1551366-REG/pspaudioware_11_31425_psp_triplemeter_3_different_meters.html) plugin, you can put it on any channel and it lets you calibrate the VU as well.
+
+As I mentioned, your ear interprets volume as an average over time, and that is what RMS and VU do. Technically, your ear has a unique way of averaging (and dampening) the sound over time, and neither RMS or VU are an exact match for how your ear averages volume they are close enough to be very useful when creating and mixing music so they have become the standards.
+
+### Demo
+I made an RMS meter and an FFT spectrum analyzer that you can demo in the [metering and FFT demo](/apps/metering-and-fft). You can pick an audio file and play it to see the RMS and frequency content. The smoothing slider changes the amount of time that is taken into account when doing the averaging.  Faster averaging gets closer to a Peak meter.  The FFT Depth selector gives higher resolution for the frequency analyzer, at the cost of processing time.

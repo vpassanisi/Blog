@@ -1,8 +1,6 @@
 import { v4 as uuid } from "uuid";
-import matter from "gray-matter";
 import fetch from "node-fetch";
 import sharp from "sharp";
-import svgToDataURI from "mini-svg-data-uri";
 import type Koa from "koa";
 import type { Post, Request } from "./types";
 

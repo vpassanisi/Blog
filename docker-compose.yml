@@ -24,6 +24,8 @@ services:
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
       - POSTGRES_DB=${POSTGRES_DB}
     command: npm run dev
+    ports:
+      - 5000:5000
     volumes:
       - ./posts:/usr/src/app
       - /usr/src/app/node_modules/

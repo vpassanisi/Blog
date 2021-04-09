@@ -4,6 +4,7 @@ import bodyParser from "koa-bodyparser";
 import { Pool } from "pg";
 import { env } from "./util/envValidator";
 import * as controller from "./controllers/posts";
+import validator, { schemas } from "./util/routeValidator";
 import { handleErrors } from "./util/ErrorHandler";
 
 const pool = new Pool({
@@ -28,8 +29,12 @@ app.use(async (ctx, next) => {
 app.use(bodyParser());
 
 router.post("/", controller.posts);
-router.post("/newPost", controller.newPost);
-router.post("/updatePost", controller.updatePost);
+router.post("/newPost", validator(schemas.newPost), controller.newPost);
+router.post(
+  "/updatePost",
+  validator(schemas.updatePost),
+  controller.updatePost
+);
 
 app.use(router.routes());
 app.use(router.allowedMethods());

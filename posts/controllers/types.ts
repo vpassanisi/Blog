@@ -11,11 +11,16 @@ export interface Post {
   live: boolean;
 }
 
-export interface Request {
-  slug?: string;
-  md?: string;
-  title?: string;
-  banner?: string;
-  excerpt?: string;
-  live?: boolean;
+export interface UpdatePostRequest {
+  id: string;
+  live: boolean;
+}
+
+export interface NewPostRequest {
+  md: string;
+  slug: string;
+  title: string;
+  banner: string;
+  excerpt: string;
+  live: boolean;
 }
